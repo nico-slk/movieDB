@@ -4,8 +4,8 @@ import MovieCard from './MovieCard';
 export default function ListCards(props) {
 
     return (
-        <div>
-            <div>
+        <div className="">
+            <div className="bord bck-grey">
                 <MovieCard 
                     name={props.name}
                     title={props.title}

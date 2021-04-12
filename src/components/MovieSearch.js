@@ -18,7 +18,7 @@ export default function MovieSearch(props) {
   return (
     <form>
       <input type="text" placeholder="holaMundo" value={state} onChange={handleChange} />
-      <button onClick={handleClick} >CLICK</button>
+      <button className="green" onClick={handleClick} >CLICK</button>
     </form>
   );
 }

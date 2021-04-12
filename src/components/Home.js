@@ -22,10 +22,10 @@ export default function Home() {
     return (
       <div className="container">
         <MovieSearch setData={setData} />
-        <ul className="row p-3">
+        <ul className="row">
           {console.log(data)}
           {data.results.map((e) => (
-            <li key={e.original_title} className="col-4 $red-300">
+            <li key={e.original_title} className="col-4 p-1">
               <ListCards
                 name={e.original_title}
                 title={e.title}
