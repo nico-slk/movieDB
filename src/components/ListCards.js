@@ -1,27 +1,19 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import MovieCard from './MovieCard';
 
 export default function ListCards(props) {
-    const [state, setState] = useState([])
-
-    useEffect(() => {
-        setState(props.movieList);
-    }, [props])
 
     return (
         <div>
             <div>
-                {props.movieList && props.movieList.map(e => 
-                    <div>
-                        <MovieCard 
-                            name={e.name} 
-                            title={e.title} 
-                            img={e.poster_path} 
-                            url={e.url} 
-                            description={e.description}
-                        />
-                    </div>
-                )}
+                <MovieCard 
+                    name={props.name}
+                    title={props.title}
+                    img={props.img}
+                    id={props.id}
+                    handleCloseModal={props.handleCloseModal}
+                    handleOpenModal={props.handleOpenModal}
+                />
             </div>
         </div>
     )
