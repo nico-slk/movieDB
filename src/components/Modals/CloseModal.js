@@ -9,7 +9,6 @@ export default function CloseModal(props) {
       img={props.img}
       id={props.id}
     >
-      {console.log(props)}
     </MovieModal>
   );
 }

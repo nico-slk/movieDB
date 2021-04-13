@@ -7,7 +7,7 @@ export default function MovieModal(props) {
   const {overview, runtime, original_title, genres, title} = detail;
 
   useEffect(() => {
-    MoviesService.getMovieDetail(props.id).then(res => {setSetail(res); console.log(res)})
+    MoviesService.getMovieDetail(props.id).then(res => setSetail(res))
   }, [])
 
   if (!props.modalIsOpen) {
@@ -18,7 +18,7 @@ export default function MovieModal(props) {
         <div className="Modal-window animate__animated animate__fadeIn">
         <img src={props.img ? `http://image.tmdb.org/t/p/w500/${props.img}` : `https://cdn1.iconfinder.com/data/icons/photo-editor-3/24/i24_photoedit_effects-512.png`} className="col-12" />
         <div>
-          {console.log(props)}
+          {(props)}
           <p>{title}</p>
           <p>{original_title}</p>
           <p>{runtime}</p>
