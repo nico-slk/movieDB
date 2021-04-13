@@ -29,11 +29,11 @@ export default function MovieSearch({ onSearchResult, emptyQuery }) {
   };
 
   return (
-    <form className="col-12 searcher">
+    <form onSubmit={handleClick} className="col-12 searcher">
 		<div>
 			<div className="input-group mb-3">
 				<input type="text" className="form-control" placeholder="Search your movie" aria-describedby="button-addon2" value={query} onChange={handleChange} />
-				<button className="btn btn-outline-secondary" type="button" onClick={handleClick} >Search</button>
+				<button className="btn btn-outline-secondary search_button" type="sumit" >Search</button>
 			</div>
 			<div className="rating_stars">
 				<p className="text-white fw-bold rating">Rating</p>
