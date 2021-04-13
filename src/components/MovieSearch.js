@@ -1,24 +1,45 @@
 import React, { useState } from "react";
+import { MoviesService } from "../services/movieServices";
+import RatingStars from "./RatingStars";
 
-export default function MovieSearch(props) {
-  const [state, setState] = useState([])
+export default function MovieSearch({ onSearchResult, emptyQuery }) {
+  const [query, setQuery] = useState("")
+  const [filter, setFilter] = useState(0)
 
   const handleChange = (e) => {
-    setState(e.target.value);
-    console.log(state);
+    setQuery(e.target.value);
   };
 
   const handleClick = (e) => {
     e.preventDefault();
-    fetch(`https://api.themoviedb.org/3/search/movie?api_key=${"e965adc31d877d6a743cb35c22347795"}&language=en-US&query=${state}`)
-      .then((res) => res.json())
-      .then((res) => props.setData(res));
+	if(query){
+		MoviesService.searchMovie(query).then(res =>{ 
+			let movies = res
+			if(filter){
+				console.log(filter)
+				movies.results = movies.results.filter(movie => movie.vote_average < filter)
+				console.log(movies)
+			}
+			onSearchResult(movies);
+			e.target.value = ""
+		})
+	} else {
+		emptyQuery()
+	}
   };
 
   return (
-    <form>
-      <input type="text" placeholder="holaMundo" value={state} onChange={handleChange} />
-      <button className="green" onClick={handleClick} >CLICK</button>
+    <form className="col-12 searcher">
+		<div>
+			<div className="input-group mb-3">
+				<input type="text" className="form-control" placeholder="Search your movie" aria-describedby="button-addon2" value={query} onChange={handleChange} />
+				<button className="btn btn-outline-secondary" type="button" onClick={handleClick} >Search</button>
+			</div>
+			<div className="rating_stars">
+				<p className="text-white fw-bold rating">Rating</p>
+				<RatingStars ratingSelected={(rating) => setFilter(rating * 2)} />
+			</div>
+		</div>
     </form>
   );
 }

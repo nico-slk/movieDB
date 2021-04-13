@@ -1,42 +1,31 @@
 import React, { useEffect, useState } from "react";
 import MovieSearch from "./MovieSearch";
 import ListCards from "./ListCards";
+import { MoviesService } from "../services/movieServices";
+import Loading from "./Loading";
 
 export default function Home() {
-  const [data, setData] = useState({});
-  const [multi, setMulti] = useState({
-    multi: true,
-  });
+	const [data, setData] = useState([]);
+	const [multi, setMulti] = useState({
+		multi: true,
+	});
 
-  useEffect(() => {
-    fetch(
-      `https://api.themoviedb.org/3/discover/movie?api_key=${"e965adc31d877d6a743cb35c22347795"}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1`
-    )
-      .then((res) => res.json())
-      .then((res) => setData(res));
-  }, []);
+	useEffect(() => {
+		getPopularMovies()
+	}, []);
 
-  if (!data) {
-    return <p>loading...</p>;
-  } else {
-    return (
-      <div className="container">
-        <MovieSearch setData={setData} />
-        <ul className="row">
-          {console.log(data)}
-          {data.results.map((e) => (
-            <li key={e.original_title} className="col-4 p-1">
-              <ListCards
-                name={e.original_title}
-                title={e.title}
-                img={e.poster_path}
-                description={e.description}
-                id={e.id}
-              />
-            </li>
-          ))}
-        </ul>
-      </div>
-    );
-  }
+	const getPopularMovies = () => {
+		MoviesService.getPopularMovies().then(res => setData(res))
+	}
+
+	if (data && !data.results) {
+		return <Loading />;
+	} else {
+		return (
+			<div className="container col-lg-8 p-0">
+				<MovieSearch onSearchResult={(res) => setData(res)} emptyQuery={() => getPopularMovies()} />
+				<ListCards results={data.results}/>
+			</div>
+		);
+	}
 }

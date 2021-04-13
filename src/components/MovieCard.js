@@ -14,28 +14,32 @@ export default function MovieCard(props) {
 		setModalOpen({ modalIsOpen: true });
 	};
 
+	const style = {
+		backgroundImage: props.img ? `url("http://image.tmdb.org/t/p/w300/${props.img}")` : `url("https://cdn1.iconfinder.com/data/icons/photo-editor-3/24/i24_photoedit_effects-512.png")`,
+		backgroundPosition: "center",
+		backgroundSize: "cover",
+		height: "100%",
+		padding: "5px"
+	}
 
 	return (
-		<div className="container">
-			<div
-				className="row he-100 bord align-items-start flex-column bd-highlight"
-				style={{
-					backgroundImage: `url("http://image.tmdb.org/t/p/w200/${props.img}")`,
-					backgroundSize: "cover",
-				}}
-			>
-				<p className="fs-6 fw-bold mt-2">{props.name}</p>
-				<div>
-					<button className="btn btn-success pt-auto " onClick={handleOpenModal}>
+		<div className="heightCard">
+		<div className="whiteTape heightCard">
+			<div style={style} className="shadow p-3 mb-5 bg-body rounded animate__animated animate__fadeIn boxes">
+				<div className="box">
+					<p className="text-white title_name fw-bold fs-6" >{props.title}</p>
+					<button className="btn btn-info boton" onClick={handleOpenModal}>
 						More info
           			</button>
 					<CloseModal
 						closeModal={handleCloseModal}
 						modalIsOpen={modalOpen.modalIsOpen}
 						img={props.img}
-					/>
-				</div>
+						id={props.id}
+						/>
+					</div>
 			</div>
 		</div>
-  );
+		</div>
+	);
 }

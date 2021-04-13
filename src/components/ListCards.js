@@ -4,17 +4,17 @@ import MovieCard from './MovieCard';
 export default function ListCards(props) {
 
     return (
-        <div className="">
-            <div className="bord bck-grey">
+        <ul className="p-0 row">
+        {props.results && props.results.map((e) => (
+            <li key={e.id} className="col-4 col-lg-3 col-sm-6 col-12 mt-3 heightCard movieCard">
                 <MovieCard 
-                    name={props.name}
-                    title={props.title}
-                    img={props.img}
-                    id={props.id}
-                    handleCloseModal={props.handleCloseModal}
-                    handleOpenModal={props.handleOpenModal}
+                    name={e.original_title}
+                    title={e.title}
+                    img={e.poster_path}
+                    id={e.id}
                 />
-            </div>
-        </div>
+            </li>
+        ))}
+    </ul>
     )
 }
