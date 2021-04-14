@@ -1,20 +1,29 @@
-import React from 'react'
-import MovieCard from './MovieCard';
+import React from "react";
+import MovieCard from "./MovieCard";
+import Loading from "./Loading";
+import NotFound from "./NotFound";
 
-export default function ListCards(props) {
+export default function ListCards({ results }) {
+  return (
+    <ul className="p-0 row">
+      {results &&
+        results.map((e) => (
+          <li
+            key={e.id}
+            className="col-4 col-lg-3 col-sm-6 col-12 mt-3 heightCard movieCard"
+          >
+            <MovieCard
+              name={e.original_title}
+              title={e.title}
+              img={e.poster_path}
+              id={e.id}
+            />
+          </li>
+        ))}
 
-    return (
-        <div>
-            <div>
-                <MovieCard 
-                    name={props.name}
-                    title={props.title}
-                    img={props.img}
-                    id={props.id}
-                    handleCloseModal={props.handleCloseModal}
-                    handleOpenModal={props.handleOpenModal}
-                />
-            </div>
-        </div>
-    )
+      {!results ? <Loading /> : null}
+
+      {results && !results.length ? <NotFound /> : null}
+    </ul>
+  );
 }
