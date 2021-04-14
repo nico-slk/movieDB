@@ -1,9 +1,10 @@
-import React from 'react'
+import React from "react";
+import loader from "../assets/loader.svg";
 
 export default function Loading() {
-    return (
-        <div className="loading_container">
-            <h1 className="loading">Loading movies...</h1>
-        </div>
-    )
+  return (
+    <div className="loading_container">
+      <img src={loader} alt="loader" />
+    </div>
+  );
 }
